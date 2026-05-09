@@ -88,7 +88,7 @@ export default function TopBar({ activeTab, onTabChange }: TopBarProps) {
   return (
     <div
       data-testid="top-bar"
-      className="flex items-center gap-1 px-3 py-1.5 border-b w-full min-w-0 overflow-hidden"
+      className="flex items-center gap-1 px-3 py-1.5 border-b w-full min-w-0 overflow-visible relative z-40"
          style={{ borderColor: 'var(--hud-border)', background: 'var(--hud-bg-surface)' }}>
       {/* Logo */}
       <span className="gradient-text font-bold text-[13px] mr-3 tracking-wider cursor-pointer shrink-0"
@@ -127,11 +127,19 @@ export default function TopBar({ activeTab, onTabChange }: TopBarProps) {
       <div className="relative shrink-0">
         <button
           onClick={() => setShowThemePicker(p => !p)}
-          className="px-2 py-1.5 text-[13px] tracking-wider uppercase cursor-pointer"
-          style={{ color: 'var(--hud-text-dim)', minHeight: '32px' }}
+          className="px-2 py-1.5 text-[12px] tracking-wider uppercase cursor-pointer flex items-center gap-1"
+          style={{
+            color: showThemePicker ? 'var(--hud-primary)' : 'var(--hud-text)',
+            background: showThemePicker ? 'var(--hud-bg-panel)' : 'transparent',
+            border: '1px solid var(--hud-border)',
+            minHeight: '32px',
+          }}
           title="Theme (t)"
+          aria-label="Open theme picker"
+          aria-expanded={showThemePicker}
         >
-          ◆
+          <span aria-hidden="true">◆</span>
+          <span className="hidden md:inline">Theme</span>
         </button>
         {showThemePicker && (
           <div className="absolute right-0 top-full mt-1 z-50 py-1 min-w-[180px]"

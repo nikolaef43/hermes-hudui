@@ -10,7 +10,7 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: 'ai',
+  theme: 'hermes-official',
   setTheme: () => {},
   scanlines: false,
   setScanlines: () => {},
@@ -26,7 +26,7 @@ export const THEMES: { id: ThemeId; labelKey: string; icon: string }[] = [
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeId>(() => {
-    return (localStorage.getItem('hud-theme') as ThemeId) || 'ai'
+    return (localStorage.getItem('hud-theme') as ThemeId) || 'hermes-official'
   })
   const [scanlines, setScanlinesState] = useState(() => {
     return localStorage.getItem('hud-scanlines') === 'true'
